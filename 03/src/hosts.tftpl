@@ -1,0 +1,18 @@
+[db]
+%{ for h in db_hosts ~}
+${h.name} ansible_host=${h.ip} fqdn=${h.fqdn}
+%{ endfor ~}
+
+[storage]
+%{ for h in storage_hosts ~}
+${h.name} ansible_host=${h.ip} fqdn=${h.fqdn}
+%{ endfor ~}
+
+[web]
+%{ for h in web_hosts ~}
+${h.name} ansible_host=${h.ip} fqdn=${h.fqdn}
+%{ endfor ~}
+
+[all:vars]
+ansible_user=ubuntu
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'

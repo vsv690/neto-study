@@ -5,18 +5,18 @@ resource "yandex_compute_instance" "db" {
   hostname    = each.value.vm_name
   zone        = var.default_zone
   platform_id = var.vm_platform
-  depends_on = [ yandex_vpc_security_group.example ]
+  depends_on  = [yandex_vpc_security_group.example]
 
   resources {
-    cores          = each.value.cpu
-    memory         = each.value.ram
-    core_fraction  = var.vm_cpu_fraction
+    cores         = each.value.cpu
+    memory        = each.value.ram
+    core_fraction = var.vm_cpu_fraction
   }
 
   boot_disk {
     initialize_params {
       image_id = data.yandex_compute_image.ubuntu.image_id
-      size      = each.value.disk_volume
+      size     = each.value.disk_volume
     }
   }
 
@@ -31,5 +31,5 @@ resource "yandex_compute_instance" "db" {
   metadata = {
     ssh-keys = "ubuntu:${file(var.vms_ssh_root_key)}"
   }
-  
+
 }

@@ -5,13 +5,6 @@ variable "token" {
   type        = string
   description = "OAuth-token; https://cloud.yandex.ru/docs/iam/concepts/authorization/oauth-token"
 }
-
-variable "vm_name" {
-  type        = string
-  default     = "netology-develop"
-  description = "Default name for instance"
-}
-
 */
 
 variable "cloud_id" {
@@ -74,6 +67,12 @@ variable "vm_family" {
   description = "Family image Ubuntu 20.04 LTS"
 }
 
+variable "vm_t4_name" {
+  type        = string
+  default     = "storage"
+  description = "Default name for instance"
+}
+
 variable "vms_ssh_root_key" {
   type        = string
   default     = "~/.ssh/id_ed25519.pub"
@@ -81,8 +80,8 @@ variable "vms_ssh_root_key" {
 }
 
 variable "metadata" {
-  type        = map(string)
-  default     = {
+  type = map(string)
+  default = {
     serial-port-enable = "1"
   }
   description = "Metadata for all Ubuntu VMs"
@@ -96,3 +95,16 @@ variable "each_vm" {
     disk_volume = number
   }))
 }
+
+variable "vd_size" {
+  type        = number
+  default     = 1
+  description = "Size of additional disk in GB"
+}
+
+variable "vd_type" {
+  type        = string
+  default     = "network-hdd"
+  description = "Type of additional disk"
+}
+
