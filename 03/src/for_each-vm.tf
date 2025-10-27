@@ -19,7 +19,9 @@ resource "yandex_compute_instance" "db" {
       size     = each.value.disk_volume
     }
   }
-
+  scheduling_policy {
+    preemptible = true
+  }
   network_interface {
     subnet_id = yandex_vpc_subnet.develop.id
     nat       = true

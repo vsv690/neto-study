@@ -11,7 +11,9 @@ resource "yandex_compute_instance" "web" {
     memory        = var.vm_ram
     core_fraction = var.vm_cpu_fraction
   }
-
+  scheduling_policy {
+    preemptible = true
+  }
   boot_disk {
     initialize_params {
       image_id = data.yandex_compute_image.ubuntu.image_id

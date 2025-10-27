@@ -31,7 +31,9 @@ resource "yandex_compute_instance" "storage" {
       yandex_vpc_security_group.example.id
     ]
   }
-
+  scheduling_policy {
+    preemptible = true
+  }
   dynamic "secondary_disk" {
     for_each = yandex_compute_disk.vd
     content {
